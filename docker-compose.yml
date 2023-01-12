@@ -3,7 +3,7 @@ services:
   phpmyadmin:
     container_name: phpmyadmin
     depends_on:
-      - mysql_server
+      - db
     image: phpmyadmin/phpmyadmin
     volumes:
       - pma_vol:/home/ubuntu/pma
@@ -15,8 +15,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
       PMA_ABSOLUTE_URI: http://example.com/pma/
 
-  mysql_server:
-    container_name: mysql_server
+  db:
+    container_name: db
     image: mysql:latest
     volumes:
       - db_data:/var/lib/mysql
@@ -28,9 +28,9 @@ services:
       MYSQL_PASSWORD: ${DB_PASS}
 
   wordpress:
-    container_name: wordpress_app
+    container_name: wordpress
     depends_on:
-      - mysql_server
+      - db
     image: wordpress:latest
     ports:
       - '8000:80'
