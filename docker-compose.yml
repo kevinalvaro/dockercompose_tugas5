@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  mysql:
+  db:
     container_name: DB-wordpress
     image: mysql:5.7
     volumes:
@@ -16,7 +16,7 @@ services:
   phpmyadmin:
     container_name: PMA-wordpress
     depends_on:
-      - mysql
+      - db
     image: phpmyadmin/phpmyadmin
     volumes:
       - pma_vol:/home/ubuntu/pma
@@ -31,7 +31,7 @@ services:
   wordpress:
     container_name: wordpress
     depends_on:
-      - mysql
+      - db
     image: wordpress:latest
     ports:
       - '8000:80'
@@ -43,9 +43,10 @@ services:
       WORDPRESS_DB_PASSWORD: ${DB_PASS}
       WORDPRESS_DB_NAME: ${DB_NAME}
 
-  proxy-nginx:
+  proxy:
     container_name: nginx-wordpress
     depends_on:
+
       - phpmyadmin
     image: nginx:1.23
     ports:
