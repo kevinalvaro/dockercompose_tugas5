@@ -6,7 +6,7 @@ services:
     image: wordpress:latest
     container_name: wp-wordpress
     env_file:
-      - secret.env
+      - .env
     restart: always
     networks:
       - wordpress
@@ -27,7 +27,7 @@ services:
     image: mysql:5.7
     container_name: wp-database
     env_file:
-      - secret.env
+      - .env
     restart: always
     networks:
       - wordpress
@@ -44,7 +44,7 @@ services:
     image: nginx:1.23
     container_name: wp-nginx
     env_file:
-      - secret.env
+      - .env
     restart: always
     networks:
       - wordpress
@@ -60,6 +60,8 @@ services:
     depends_on:
       - db
     image: phpmyadmin/phpmyadmin
+    env_file:
+      - .env
     volumes:
       - pma_vol:/home/ubuntu/pma
     restart: always
