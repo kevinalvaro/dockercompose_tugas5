@@ -8,10 +8,10 @@ services:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_ROOT_PASSWORD: cloud
+      MYSQL_DATABASE: cloud
+      MYSQL_USER: cloud
+      MYSQL_PASSWORD: cloud
 #    networks:
 #      - wpsite
   # phpmyadmin
@@ -26,7 +26,7 @@ services:
       - '8888:80'
     environment:
       PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
+      MYSQL_ROOT_PASSWORD: cloud
       PMA_ABSOLUTE_URI: http://example.com/pma/
 #    networks:
 #      - wpsite
@@ -41,9 +41,9 @@ services:
     volumes: ['./:/var/www/html']
     environment:
       WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: ${DB_USER}
-      WORDPRESS_DB_PASSWORD: ${DB_PASS}
-      WORDPRESS_DB_NAME: ${DB_NAME}
+      WORDPRESS_DB_USER: cloud
+      WORDPRESS_DB_PASSWORD: cloud
+      WORDPRESS_DB_NAME: cloud
 #    networks:
 #      - wpsite
   proxy:
