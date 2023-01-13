@@ -1,20 +1,17 @@
 version: '3'
 
 services:
-  # Database
   db:
     image: mysql:5.7
     volumes:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: cloud
-      MYSQL_DATABASE: cloud
-      MYSQL_USER: cloud
-      MYSQL_PASSWORD: cloud
-#    networks:
-#      - wpsite
-  # phpmyadmin
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
+      MYSQL_DATABASE: ${DB_NAME}
+      MY SQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+
   phpmyadmin:
     depends_on:
       - db
@@ -26,11 +23,9 @@ services:
       - '8888:80'
     environment:
       PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: cloud
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
       PMA_ABSOLUTE_URI: http://example.com/pma/
-#    networks:
-#      - wpsite
-  # Wordpress
+
   wordpress:
     depends_on:
       - db
@@ -41,14 +36,12 @@ services:
     volumes: ['./:/var/www/html']
     environment:
       WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: cloud
-      WORDPRESS_DB_PASSWORD: cloud
-      WORDPRESS_DB_NAME: cloud
-#    networks:
-#      - wpsite
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_PASS}
+      WORDPRESS_DB_NAME: ${DB_NAME}
+
   proxy:
     depends_on:
-#      - wordpress
       - phpmyadmin
     image: nginx:1.23
     ports:
@@ -56,10 +49,7 @@ services:
     restart: always
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-#    networks:
-#      - wpsite
-#networks:
-#  wpsite:
+
 volumes:
   db_data:
   pma_vol:
