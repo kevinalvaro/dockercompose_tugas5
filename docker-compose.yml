@@ -15,7 +15,7 @@ services:
     volumes: ['./:/var/www/html']
       # - /path/to/repo/myTheme/:/var/www/html/wp-content/themes/myTheme
     environment:
-      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_HOST: db:33060
       WORDPRESS_DB_USER: ${DB_USER}
       WORDPRESS_DB_PASSWORD: ${DB_PASS}
       WORDPRESS_DB_NAME: ${DB_NAME}
@@ -25,8 +25,6 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     restart: always
-    ports:
-      - '3306:3306'
     environment:
       MYSQL_ROOT_PASSWORD: cloud-pass
       MYSQL_DATABASE: cloud-db
