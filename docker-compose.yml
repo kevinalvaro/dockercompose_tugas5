@@ -23,7 +23,8 @@ services:
   database:
     # default port 3306
     image: mysql:5.7
-    container_name: wp-database
+    volumes:
+      - db_data:/var/lib/mysql
     env_file:
       - .env
     restart: always
@@ -32,8 +33,6 @@ services:
       MYSQL_DATABASE: ${DB_NAME}
       MY SQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASS}
-    volumes:
-      - db_data:/var/lib/mysql
 
   nginx:
     # default ports 80, 443 - expose mapping as needed to host
