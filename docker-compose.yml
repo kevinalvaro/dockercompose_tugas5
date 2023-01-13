@@ -15,7 +15,7 @@ services:
     volumes: ['./:/var/www/html']
       # - /path/to/repo/myTheme/:/var/www/html/wp-content/themes/myTheme
     environment:
-      WORDPRESS_DB_HOST: db:33060
+      WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: ${DB_USER}
       WORDPRESS_DB_PASSWORD: ${DB_PASS}
       WORDPRESS_DB_NAME: ${DB_NAME}
