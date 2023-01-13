@@ -58,7 +58,7 @@ services:
   
   phpmyadmin:
     depends_on:
-      - db
+      - database
     image: phpmyadmin/phpmyadmin
     env_file:
       - .env
