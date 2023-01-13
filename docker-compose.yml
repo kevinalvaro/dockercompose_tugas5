@@ -11,7 +11,7 @@ services:
     ports:
       - '8000:80'
     depends_on:
-      - database
+      - db
     volumes: ['./:/var/www/html']
       # - /path/to/repo/myTheme/:/var/www/html/wp-content/themes/myTheme
     environment:
@@ -20,13 +20,10 @@ services:
       WORDPRESS_DB_PASSWORD: ${DB_PASS}
       WORDPRESS_DB_NAME: ${DB_NAME}
 
-  database:
-    # default port 3306
+  db:
     image: mysql:5.7
     volumes:
       - db_data:/var/lib/mysql
-    env_file:
-      - .env
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
@@ -50,7 +47,7 @@ services:
   
   phpmyadmin:
     depends_on:
-      - database
+      - db
     image: phpmyadmin/phpmyadmin
     env_file:
       - .env
