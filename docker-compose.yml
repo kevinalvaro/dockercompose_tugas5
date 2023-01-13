@@ -65,6 +65,8 @@ services:
     volumes:
       - pma_vol:/home/ubuntu/pma
     restart: always
+    networks:
+      - wordpress
     ports:
       - '3306:80' #port default to public
     environment:
