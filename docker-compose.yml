@@ -8,8 +8,6 @@ services:
     env_file:
       - .env
     restart: always
-    networks:
-      - wordpress
     ports:
       - '8000:80'
     depends_on:
@@ -29,8 +27,6 @@ services:
     env_file:
       - .env
     restart: always
-    networks:
-      - wordpress
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
       MYSQL_DATABASE: ${DB_NAME}
@@ -46,13 +42,10 @@ services:
     env_file:
       - .env
     restart: always
-    networks:
-      - wordpress
     depends_on:
       - phpmyadmin
     ports:
       - "80:80"    # http
-      - "8443:443"   # https
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
   
@@ -65,8 +58,6 @@ services:
     volumes:
       - pma_vol:/home/ubuntu/pma
     restart: always
-    networks:
-      - wordpress
     ports:
       - '3306:80' #port default to public
     environment:
