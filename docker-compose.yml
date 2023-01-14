@@ -59,7 +59,7 @@ services:
       - pma_vol:/home/ec2-user/pma
     restart: always
     ports:
-      - '8888:80' #port default to public
+      - '8001:80' #port default to public
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
